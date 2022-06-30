@@ -2,7 +2,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./utils/generatePage');
-const Employee = require('../homework10-TeamProfileGenerator/lib/Employee')
+// Packages needed for this application
+const Intern = require('../lib/Intern');
+const Engineer = require('../lib/Engineer');
+const Manager = require('../lib/Manager');
 
 
 // Parent Constructor class 
