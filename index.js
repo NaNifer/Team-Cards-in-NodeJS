@@ -3,6 +3,26 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./utils/generatePage');
 
+// askToPlayAgain() {
+//     inquirer
+//       .prompt([
+//         {
+//           type: "confirm",
+//           name: "choice",
+//           message: "Play Again?"
+//         }
+//       ])
+//       .then(val => {
+//         // If the user says yes to another game, play again, otherwise quit the game
+//         if (val.choice) {
+//           this.play();
+//         } else {
+//           this.quit();
+//         }
+//       });
+//   }
+
+
 
 // Parent Constructor class 
 const PersonQuestions = [
