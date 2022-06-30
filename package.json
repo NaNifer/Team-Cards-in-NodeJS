@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/NaNifer/Team-Profile-Generator-h10#readme",
   "dependencies": {
-    "inquirer": "^9.0.0"
+    "inquirer": "^6.3.1"
   }
 }

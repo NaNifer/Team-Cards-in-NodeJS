@@ -1,15 +1,15 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generatePage = require('./utils/generatePage');
+// const generatePage = require('./utils/generatePage');
 // Packages needed for this application
-const Intern = require('../lib/Intern');
-const Engineer = require('../lib/Engineer');
-const Manager = require('../lib/Manager');
+const Intern = require('./lib/Intern');
+const Engineer = require('./lib/Engineer');
+const Manager = require('./lib/Manager');
 
 
 // Parent Constructor class 
-const EmployeeQuestions = [
+const employeeQuestions = [
     {
         type: 'input',
         message: 'Please enter name of team member',
@@ -33,26 +33,33 @@ const EmployeeQuestions = [
 
 //  Sub-class Questions
 // Team Manager -- office number
+const managerQuestion = employeeQuestions.concat([
 {
     type: 'input',
     message: 'What is their office number?',
     name: 'officeNum',
     default: '42'
-}
-// Engineer -- gitHub username
+}])
+
+// Engineer -- gitHub 
+const engineerQuest = [
 {
     type: 'input',
     message: 'What is their Github user name?',
     name: 'githubUser',
     default: 'koolkid'
-}
+}]
+
 // Intern -- school
+
+const internQuest = [
 {
     type: 'input',
     message: 'What is the name of their school?',
     name: 'school',
     default: 'UCSF Berkeley'
-}
+}]
+
 
 
 // 2 EXAMPLES FOR inquirer prompt
@@ -70,22 +77,32 @@ const EmployeeQuestions = [
 // };
 
 
-// askToPlayAgain() {
-//     inquirer
-//       .prompt([
-//         {
-//           type: "confirm",
-//           name: "choice",
-//           message: "Play Again?"
-//         }
-//       ])
-//       .then(val => {
-//         // If the user says yes to another game, play again, otherwise quit the game
-//         if (val.choice) {
-//           this.play();
-//         } else {
-//           this.quit();
-//         }
-//       });
-//   }
+function askEmployeeQuest() {
+    inquirer
+      .prompt([
+        {
+          type: "confirm",
+          name: "choice",
+          message: "Play Again?"
+        }
+      ])
+      .then(val => {
+        // If the user says yes to another game, play again, otherwise quit the game
+        if (val.choice) {
+          this.play();
+        } else {
+          this.quit();
+        }
+      });
+  }
 
+  function createManager() {
+    inquirer
+      .prompt(managerQuestion)
+      .then(val => {
+        // If the user says yes to another game, play again, otherwise quit the game
+      console.log(val)
+      });
+  }
+
+  createManager();
