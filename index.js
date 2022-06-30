@@ -6,7 +6,7 @@ const fs = require('fs');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
-
+let HTMLpage = ""
 
 // Parent Constructor class 
 const employeeQuestions = [
@@ -21,7 +21,7 @@ const employeeQuestions = [
         message: 'What is their ID number?',
         name: 'empId',
         default: '8675309'
-    }, 
+    },
     {
         type: 'input',
         message: 'What is their email address?',
@@ -34,31 +34,31 @@ const employeeQuestions = [
 //  Sub-class Questions
 // Team Manager -- office number
 const managerQuestion = employeeQuestions.concat([
-{
-    type: 'input',
-    message: 'What is their office number?',
-    name: 'officeNum',
-    default: '42'
-}])
+    {
+        type: 'input',
+        message: 'What is their office number?',
+        name: 'officeNum',
+        default: '42'
+    }])
 
 // Engineer -- gitHub 
 const engineerQuest = [
-{
-    type: 'input',
-    message: 'What is their Github user name?',
-    name: 'githubUser',
-    default: 'koolkid'
-}]
+    {
+        type: 'input',
+        message: 'What is their Github user name?',
+        name: 'githubUser',
+        default: 'koolkid'
+    }]
 
 // Intern -- school
 
 const internQuest = [
-{
-    type: 'input',
-    message: 'What is the name of their school?',
-    name: 'school',
-    default: 'UCSF Berkeley'
-}]
+    {
+        type: 'input',
+        message: 'What is the name of their school?',
+        name: 'school',
+        default: 'UCSF Berkeley'
+    }]
 
 
 
@@ -79,30 +79,49 @@ const internQuest = [
 
 function askEmployeeQuest() {
     inquirer
-      .prompt([
-        {
-          type: "confirm",
-          name: "choice",
-          message: "Play Again?"
-        }
-      ])
-      .then(val => {
-        // If the user says yes to another game, play again, otherwise quit the game
-        if (val.choice) {
-          this.play();
-        } else {
-          this.quit();
-        }
-      });
-  }
+        .prompt([
+            {
+                type: "rawlist",
+                name: "option",
+                choice:["Add Intern","Add Engineer","Exit App"],
+                message: "Play Again?"
+            }
+        ])
+        .then(val => {
+            // If the user says yes to another game, play again, otherwise quit the game
+            if (val.option === "Add Intern") {
+                createIntern();
+            } else if (val.option === "Add Engineer") {
+                createEngineer();
+            }
+            else  {
+                this.quit();
+            }
+        });
+}
 
-  function createManager() {
+function createManager() {
     inquirer
-      .prompt(managerQuestion)
-      .then(val => {
-        // If the user says yes to another game, play again, otherwise quit the game
-      console.log(val)
-      });
-  }
+        .prompt(managerQuestion)
+        .then(val => {
+            // If the user says yes to another game, play again, otherwise quit the game
+            console.log(val)
+            const newHireEmp = new Manager(val.empName, val.empId, val.empEmail, val.officeNum)
+            HTMLpage += `
+      <div class="card" style="width: 18rem;">
+ 
+  <div class="card-body bg-primary">
+    <h5 class="card-title">${newHireEmp.empName}</h5>
+    <h6 class="card-text">${newHireEmp.getRole()}<h6>
+    <p class="card-text">ID: ${newHireEmp.empId}</p>
+    <p class="card-text">Office Num: ${newHireEmp.officeNumber}</p>
+    <a href="mailto:${newHireEmp.empEmail}" class="btn btn-primary">${newHireEmp.empEmail}</a>
+  </div>
+</div>
+      `
+      askEmployeeQuest()
+        });
+}
 
-  createManager();
+
+createManager();
