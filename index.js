@@ -85,16 +85,17 @@ function askEmployeeQuest() {
             {
                 type: "rawlist",
                 name: "option",
-                choice:["Add Intern","Add Engineer","Exit App"],
+                choice:["Add Intern","Add Engineer", "Add Manager", "Exit App"],
                 message: "What class of employee would you like ot add to the team?"
             }
         ])
         .then(val => {
-           
             if (val.option === "Add Intern") {
                 createIntern();
             } else if (val.option === "Add Engineer") {
                 createEngineer();
+            }  else if (val.option === "Add Manager") {
+                createManager();
             }
             else  {
                 this.quit();
@@ -119,10 +120,53 @@ function createManager() {
             </div>
             </div>
                 `;
-      askEmployeeQuest();
+    //   askEmployeeQuest();
         });
-}
+};
+
+function createEngineer() {
+    inquirer
+        .prompt(engineerQuest)
+        .then(val => {
+            console.log(val)
+            const newHireEmp = new Engineer(val.empName, val.empId, val.empEmail, val.githubUser)
+            HTMLpage += `
+            <div class="card" style="width: 18rem;">
+            <div class="card-body bg-primary">
+                <h5 class="card-title">${newHireEmp.empName}</h5>
+                <h6 class="card-text">${newHireEmp.getRole()}<h6>
+                <p class="card-text">ID: ${newHireEmp.empId}</p>
+                <p class="card-text">Github: ${newHireEmp.githubUser}</p>
+                <a href="mailto:${newHireEmp.empEmail}" class="btn btn-primary">${newHireEmp.empEmail}</a>
+            </div>
+            </div>
+                `;
+    //   askEmployeeQuest();
+        });
+};
+
+function createIntern() {
+    inquirer
+        .prompt(internQuest)
+        .then(val => {
+            console.log(val)
+            const newHireEmp = new Intern(val.empName, val.empId, val.empEmail, val.school)
+            HTMLpage += `
+            <div class="card" style="width: 18rem;">
+            <div class="card-body bg-primary">
+                <h5 class="card-title">${newHireEmp.empName}</h5>
+                <h6 class="card-text">${newHireEmp.getRole()}<h6>
+                <p class="card-text">ID: ${newHireEmp.empId}</p>
+                <p class="card-text">School: ${newHireEmp.school}</p>
+                <a href="mailto:${newHireEmp.empEmail}" class="btn btn-primary">${newHireEmp.empEmail}</a>
+            </div>
+            </div>
+                `;
+    //   askEmployeeQuest();
+        });
+};
 
 
 
-createManager();
+
+askEmployeeQuest();
