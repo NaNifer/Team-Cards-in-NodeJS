@@ -1,8 +1,8 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHTML = require('./utils/generateHTML');
-const validation = require('./utils/validation');
+// const generateHTML = require('./utils/generateHTML');
+// const validation = require('./utils/validation');
 
 // Packages needed for this application
 const Intern = require('./lib/Intern');
@@ -80,35 +80,40 @@ const internQuest = employeeQuestions.concat([
 
 
 function askEmployeeQuest() {
+    console.log("hi");
     inquirer
         .prompt([
             {
-                type: "rawlist",
-                name: "option",
-                choice:["Add Intern","Add Engineer", "Add Manager", "Exit App"],
+                type: "list",
+                name: "addEmpl",
+                choices:["Add Intern","Add Engineer", "Add Manager", "Exit App"],
                 message: "What class of employee would you like ot add to the team?"
             }
         ])
-        .then(val => {
-            if (val.option === "Add Intern") {
+        .then((val) => {
+          if (val.addEmpl === "Add Intern") {
                 createIntern();
-            } else if (val.option === "Add Engineer") {
+            } else if (val.addEmpl === "Add Engineer") {
                 createEngineer();
-            }  else if (val.option === "Add Manager") {
+            }  else if (val.addEmpl === "Add Manager") {
                 createManager();
             }
-            else  {
-                this.quit();
-            }
+            // else  {
+            //     quit();
+            // }
         });
 }
 
 function createManager() {
     inquirer
         .prompt(managerQuestion)
-        .then(val => {
+        .then((val) => {
             console.log(val)
-            const newHireEmp = new Manager(val.empName, val.empId, val.empEmail, val.officeNum)
+            const newHireEmp = new Manager(
+                val.empName, 
+                val.empId, 
+                val.empEmail, 
+                val.officeNum)
             HTMLpage += `
             <div class="card" style="width: 18rem;">
             <div class="card-body bg-primary">
@@ -127,9 +132,13 @@ function createManager() {
 function createEngineer() {
     inquirer
         .prompt(engineerQuest)
-        .then(val => {
+        .then((val) => {
             console.log(val)
-            const newHireEmp = new Engineer(val.empName, val.empId, val.empEmail, val.githubUser)
+            const newHireEmp = new Engineer(
+                val.empName, 
+                val.empId, 
+                val.empEmail, 
+                val.githubUser)
             HTMLpage += `
             <div class="card" style="width: 18rem;">
             <div class="card-body bg-primary">
@@ -148,9 +157,13 @@ function createEngineer() {
 function createIntern() {
     inquirer
         .prompt(internQuest)
-        .then(val => {
+        .then((val) => {
             console.log(val)
-            const newHireEmp = new Intern(val.empName, val.empId, val.empEmail, val.school)
+            const newHireEmp = new Intern(
+                val.empName, 
+                val.empId, 
+                val.empEmail, 
+                val.school)
             HTMLpage += `
             <div class="card" style="width: 18rem;">
             <div class="card-body bg-primary">
@@ -165,8 +178,6 @@ function createIntern() {
     //   askEmployeeQuest();
         });
 };
-
-
 
 
 askEmployeeQuest();
