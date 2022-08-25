@@ -70,16 +70,16 @@ function askEmployeeQuest() {
             {
                 type: "list",
                 name: "addEmpl",
-                choices:["Add Intern","Add Engineer", "Add Manager", "Exit App"],
+                choices: ["Add Intern", "Add Engineer", "Add Manager", "Exit App"],
                 message: "What class of employee would you like ot add to the team?"
             }
         ])
         .then((val) => {
-          if (val.addEmpl === "Add Intern") {
+            if (val.addEmpl === "Add Intern") {
                 createIntern();
             } else if (val.addEmpl === "Add Engineer") {
                 createEngineer();
-            }  else if (val.addEmpl === "Add Manager") {
+            } else if (val.addEmpl === "Add Manager") {
                 createManager();
             }
         });
@@ -91,22 +91,28 @@ function createManager() {
         .then((val) => {
             console.log(val)
             const newHireEmp = new Manager(
-                val.empName, 
-                val.empId, 
-                val.empEmail, 
+                val.empName,
+                val.empId,
+                val.empEmail,
                 val.officeNum)
             HTMLpage += `
-            <div class="card" style="width: 18rem;">
-            <div class="card-body bg-primary">
-                <h5 class="card-title">${newHireEmp.empName}</h5>
-                <h6 class="card-text">${newHireEmp.getRole()}<h6>
-                <p class="card-text">ID: ${newHireEmp.empId}</p>
-                <p class="card-text">Office Num: ${newHireEmp.officeNumber}</p>
-                <a href="mailto:${newHireEmp.empEmail}" class="btn btn-primary">${newHireEmp.empEmail}</a>
+                <div class="card bg-primary mb-3" id="member-card">
+            <div class="card-header bg-primary text-white">
+                <h1>${newHireEmp.empName}</h1>
+                <h2 class="engineer-role"><img src="">${newHireEmp.getRole()}</h2>
             </div>
+            <div class="card-body bg-light text-black">
+                <!-- List Group for card content -->
+                <ul class="list-group list-group-flush bg-white">
+                    <li class="list-group-item">ID: ${newHireEmp.empId}</li>
+                    <li class="list-group-item">Email: <a
+                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}/a></li>
+                    <li class="list-group-item"> Office Number: ${newHireEmp.officeNumber}</li>
+                </ul>
             </div>
+        </div>
                 `;
-      askEmployeeQuest();
+            askEmployeeQuest();
         });
 };
 
@@ -116,22 +122,29 @@ function createEngineer() {
         .then((val) => {
             console.log(val)
             const newHireEmp = new Engineer(
-                val.empName, 
-                val.empId, 
-                val.empEmail, 
+                val.empName,
+                val.empId,
+                val.empEmail,
                 val.githubUser)
             HTMLpage += `
-            <div class="card" style="width: 18rem;">
-            <div class="card-body bg-primary">
-                <h5 class="card-title">${newHireEmp.empName}</h5>
-                <h6 class="card-text">${newHireEmp.getRole()}<h6>
-                <p class="card-text">ID: ${newHireEmp.empId}</p>
-                <p class="card-text">Github: ${newHireEmp.githubUser}</p>
-                <a href="mailto:${newHireEmp.empEmail}" class="btn btn-primary">${newHireEmp.empEmail}</a>
+                <div class="card bg-primary mb-3" id="member-card">
+            <div class="card-header bg-primary text-white">
+                <h1>${newHireEmp.empName}</h1>
+                <h2 class="engineer-role"><img src="">${newHireEmp.getRole()}</h2>
             </div>
+            <div class="card-body bg-light text-black">
+                <!-- List Group for card content -->
+                <ul class="list-group list-group-flush bg-white">
+                    <li class="list-group-item">ID: ${newHireEmp.empId}</li>
+                    <li class="list-group-item">Email: <a
+                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}/a></li>
+                    <li class="list-group-item"> Github: <a href="https://github.com/${newHireEmp.githubUser}"</a>
+                    </li>
+                </ul>
             </div>
+        </div>
                 `;
-      askEmployeeQuest();
+            askEmployeeQuest();
         });
 };
 
@@ -141,22 +154,28 @@ function createIntern() {
         .then((val) => {
             console.log(val)
             const newHireEmp = new Intern(
-                val.empName, 
-                val.empId, 
-                val.empEmail, 
+                val.empName,
+                val.empId,
+                val.empEmail,
                 val.school)
             HTMLpage += `
-            <div class="card" style="width: 18rem;">
-            <div class="card-body bg-primary">
-                <h5 class="card-title">${newHireEmp.empName}</h5>
-                <h6 class="card-text">${newHireEmp.getRole()}<h6>
-                <p class="card-text">ID: ${newHireEmp.empId}</p>
-                <p class="card-text">School: ${newHireEmp.school}</p>
-                <a href="mailto:${newHireEmp.empEmail}" class="btn btn-primary">${newHireEmp.empEmail}</a>
+                <div class="card bg-primary mb-3" id="member-card">
+            <div class="card-header bg-primary text-white">
+                <h1>${newHireEmp.empName}</h1>
+                <h2 class="engineer-role"><img src="">${newHireEmp.getRole()}</h2>
             </div>
+            <div class="card-body bg-light text-black">
+                <!-- List Group for card content -->
+                <ul class="list-group list-group-flush bg-white">
+                    <li class="list-group-item">ID: ${newHireEmp.empId}</li>
+                    <li class="list-group-item">Email: <a
+                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}/a></li>
+                    <li class="list-group-item"> School: ${newHireEmp.school}</li>
+                </ul>
             </div>
+        </div>
                 `;
-      askEmployeeQuest();
+            askEmployeeQuest();
         });
 };
 
