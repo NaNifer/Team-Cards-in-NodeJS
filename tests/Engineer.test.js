@@ -5,10 +5,10 @@ describe('Engineer Class:', () => {
         it('should create a new instance of a Engineer class with a name, id, email, and github', () => {
             const newEngineer = new Engineer('Mary', 3, 'maryhadalittlelamb@baaaaaaa.com', 'NaNifer');
             expect(newEngineer).toBeInstanceOf(Engineer);
-            expect(newEngineer.name).toBe('Mary');
-            expect(newEngineer.id).toBe(3);
-            expect(newEngineer.email).toBe('maryhadalittlelamb@baaaaaaa.com');
-            expect(newEngineer.github).toBe('NaNifer');
+            expect(newEngineer.empName).toBe('Mary');
+            expect(newEngineer.empId).toBe(3);
+            expect(newEngineer.empEmail).toBe('maryhadalittlelamb@baaaaaaa.com');
+            expect(newEngineer.githubUser).toBe('NaNifer');
         })
     })
 

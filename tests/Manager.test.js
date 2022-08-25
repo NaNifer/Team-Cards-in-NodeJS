@@ -6,9 +6,9 @@ describe('Manager Class:', () => {
         it('should create a new instance of a Manager class with a name, id, email, and office number', () => {
             const newMgr = new Manager('Mary', 3, 'maryhadalittlelamb@baaaaaaa.com', '42');
             expect(newMgr).toBeInstanceOf(Manager);
-            expect(newMgr.name).toBe('Mary');
-            expect(newMgr.id).toBe(3);
-            expect(newMgr.email).toBe('maryhadalittlelamb@baaaaaaa.com');
+            expect(newMgr.empName).toBe('Mary');
+            expect(newMgr.empId).toBe(3);
+            expect(newMgr.empEmail).toBe('maryhadalittlelamb@baaaaaaa.com');
             expect(newMgr.officeNumber).toBe('42');
         })
     })

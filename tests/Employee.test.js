@@ -3,11 +3,11 @@ const Employee = require('../lib/Employee');
 describe('Employee Class:', () => {
     describe('It creates a new object:', () => {
         it('Should create a new instance of Employee object with a name, id, and email', () => {
-            const newEmpl = new Employee('Mary', 3, 'maryhadalittlelamb@baaaaaaa.com');
+            const newEmpl = new Employee('Mary', 3, 'maryhadalittlelamb.com');
             expect(newEmpl).toBeInstanceOf(Employee);
-            expect(newEmpl.name).toBe('Mary');
-            expect(newEmpl.id).toBe(3);
-            expect(newEmpl.email).toBe('maryhadalittlelamb.com');
+            expect(newEmpl.empName).toBe('Mary');
+            expect(newEmpl.empId).toBe(3);
+            expect(newEmpl.empEmail).toBe('maryhadalittlelamb.com');
         })
     })
 
@@ -19,7 +19,7 @@ describe('Employee Class:', () => {
 
         it('Has a getId() method that returns the object ID', () => {
             const newEmpl = new Employee('Mary', 3, 'maryhadalittlelamb.com');
-            expect(newEmpl.getEmpId()).toBe(5);
+            expect(newEmpl.getEmpId()).toBe(3);
         });
 
         it('Has a getEmail() method that returns the object email', () => {

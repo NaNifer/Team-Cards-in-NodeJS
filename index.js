@@ -63,22 +63,6 @@ const internQuest = employeeQuestions.concat([
     }])
 
 
-
-// 2 EXAMPLES FOR inquirer prompt
-// ================================
-// 
-// function init() {
-//     inquirer
-//         .prompt(questions)
-//         .then(answers => {
-//             writeToFile(answers.fileName, answers);
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         })
-// };
-
-
 function askEmployeeQuest() {
     console.log("hi");
     inquirer
@@ -98,9 +82,6 @@ function askEmployeeQuest() {
             }  else if (val.addEmpl === "Add Manager") {
                 createManager();
             }
-            // else  {
-            //     quit();
-            // }
         });
 }
 
@@ -125,7 +106,7 @@ function createManager() {
             </div>
             </div>
                 `;
-    //   askEmployeeQuest();
+      askEmployeeQuest();
         });
 };
 
@@ -150,7 +131,7 @@ function createEngineer() {
             </div>
             </div>
                 `;
-    //   askEmployeeQuest();
+      askEmployeeQuest();
         });
 };
 
@@ -175,7 +156,7 @@ function createIntern() {
             </div>
             </div>
                 `;
-    //   askEmployeeQuest();
+      askEmployeeQuest();
         });
 };
 

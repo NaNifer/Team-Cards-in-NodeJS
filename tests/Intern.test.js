@@ -5,9 +5,9 @@ describe('Intern Class:', () => {
         it('should create a new instance of an Intern with a name, id, email, and school', () => {
             const newIntern = new Intern('Drake', 9, 'drake@SFSU.edu', 'SFSU');
             expect(newIntern).toBeInstanceOf(Intern);
-            expect(newIntern.name).toBe('Drake');
-            expect(newIntern.id).toBe(9);
-            expect(newIntern.email).toBe('drake@SFSU.edu');
+            expect(newIntern.empName).toBe('Drake');
+            expect(newIntern.empId).toBe(9);
+            expect(newIntern.empEmail).toBe('drake@SFSU.edu');
             expect(newIntern.school).toBe('SFSU');
         })
     })
