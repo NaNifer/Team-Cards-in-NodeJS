@@ -1,7 +1,7 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-
+const fse = require('fs-extra');
 // Library needed for this application
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
@@ -218,7 +218,7 @@ function createIntern() {
 };
 
 function writeToFile(HTMLcards) {
-    fs.writeFile('public/index.html', htmlPage, err => {
+    fse.writeFile('public/index.html', htmlPage, err => {
         if (err) {
             console.log(err, "line 224, write file");
             return;
