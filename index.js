@@ -218,7 +218,7 @@ function createIntern() {
 };
 
 function writeToFile(HTMLcards) {
-    fse.writeFile('public/index.html', htmlPage, err => {
+    fse.writeFile('output/index.html', htmlPage, err => {
         if (err) {
             console.log(err, "line 224, write file");
             return;
