@@ -4,6 +4,7 @@
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
+  - [Installation](#Installation)
   - [User Story](#user-story)
   - [Acceptance Criteria](#acceptance-criteria)
   - [Screenshot](#screenshot)
@@ -23,6 +24,13 @@
 ### The challenge
 
 Team Profile Generator is a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.
+
+
+### Installation
+
+1. Create a .gitignore file and include node_modules and .DS store. This ensures that the node_modules directory isn't tracked or uploaded to GitHub.
+2. Use the command-line, npm install, to install Inquirer NPM.
+3. To start answering questions to create the HTML file, use the command, node app.js in the terminal.
 
 ### User Story
 
@@ -74,8 +82,12 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### Built with
 
-- Semantic HTML5 markup
+- Semantic HTML5 Markup
 - CSS
+- JavaScript
+- Node.js
+- Jest
+- Inquirer
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 

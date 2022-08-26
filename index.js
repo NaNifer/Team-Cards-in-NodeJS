@@ -1,15 +1,53 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const generateHTML = require('./utils/generateHTML');
-// const validation = require('./utils/validation');
 
-// Packages needed for this application
+// Library needed for this application
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 
-let HTMLpage = ""
+let HTMLcards = ""
+
+let htmlPage = `
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap CDN css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Team Profile Generator</title>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid text-center text-white bg-danger">
+        <div class="container">
+            <h1 class="display-4">My Team</h1>
+            <p class="lead">Meet all the great peeps on our team!</p>
+        </div>
+    </div>
+
+    ${HTMLcards}
+    <!-- boostrap scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="./assets/js/index.js"></script>
+</body>
+
+</html>
+`
 
 // Parent Constructor class 
 const employeeQuestions = [
@@ -64,7 +102,6 @@ const internQuest = employeeQuestions.concat([
 
 
 function askEmployeeQuest() {
-    console.log("hi");
     inquirer
         .prompt([
             {
@@ -89,13 +126,12 @@ function createManager() {
     inquirer
         .prompt(managerQuestion)
         .then((val) => {
-            console.log(val)
             const newHireEmp = new Manager(
                 val.empName,
                 val.empId,
                 val.empEmail,
                 val.officeNum)
-            HTMLpage += `
+            HTMLcards += `
                 <div class="card bg-primary mb-3" id="member-card">
             <div class="card-header bg-primary text-white">
                 <h1>${newHireEmp.empName}</h1>
@@ -112,6 +148,7 @@ function createManager() {
             </div>
         </div>
                 `;
+            console.log(HTMLcards, "line 152, create mgr q");
             askEmployeeQuest();
         });
 };
@@ -120,13 +157,12 @@ function createEngineer() {
     inquirer
         .prompt(engineerQuest)
         .then((val) => {
-            console.log(val)
             const newHireEmp = new Engineer(
                 val.empName,
                 val.empId,
                 val.empEmail,
                 val.githubUser)
-            HTMLpage += `
+            HTMLcards += `
                 <div class="card bg-primary mb-3" id="member-card">
             <div class="card-header bg-primary text-white">
                 <h1>${newHireEmp.empName}</h1>
@@ -144,6 +180,8 @@ function createEngineer() {
             </div>
         </div>
                 `;
+            console.log(HTMLcards, "line 184, createEngineer q");
+
             askEmployeeQuest();
         });
 };
@@ -152,13 +190,12 @@ function createIntern() {
     inquirer
         .prompt(internQuest)
         .then((val) => {
-            console.log(val)
             const newHireEmp = new Intern(
                 val.empName,
                 val.empId,
                 val.empEmail,
                 val.school)
-            HTMLpage += `
+            HTMLcards += `
                 <div class="card bg-primary mb-3" id="member-card">
             <div class="card-header bg-primary text-white">
                 <h1>${newHireEmp.empName}</h1>
@@ -175,9 +212,35 @@ function createIntern() {
             </div>
         </div>
                 `;
-            askEmployeeQuest();
+                console.log(HTMLcards, "line 216, create intern q");
+                askEmployeeQuest();
         });
 };
 
+function writeToFile(HTMLcards) {
+    fs.writeFile('public/index.html', htmlPage, err => {
+        if (err) {
+            console.log(err, "line 224, write file");
+            return;
+        }
+        else {
+            console.log('File written successfully!');
+        }
+    });
+};
 
-askEmployeeQuest();
+async function init() {
+    // Prompt user in command line for manager questions
+    await askEmployeeQuest();
+    console.log(HTMLcards, "line 236, init after emp q");
+    // Start team member prompts if user wants to add team members
+    if (HTMLcards.addEmpl === 'Exit App') {
+        console.log("line 239, init if statment");
+        writeToFile(HTMLcards);
+    }
+    // Call the write to file function with the data
+    console.log("line 243, outside if statement");
+};
+
+
+init();
