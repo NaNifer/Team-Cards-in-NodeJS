@@ -9,7 +9,8 @@ const Manager = require('./lib/Manager');
 
 let HTMLcards = ""
 
-let htmlPage = `
+function makeHtmlPage(cards) {
+return `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +33,7 @@ let htmlPage = `
         </div>
     </div>
 
-    ${HTMLcards}
+    ${cards}
     <!-- boostrap scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -47,7 +48,7 @@ let htmlPage = `
 </body>
 
 </html>
-`
+`}
 
 // Parent Constructor class 
 const employeeQuestions = [
@@ -112,14 +113,25 @@ function askEmployeeQuest() {
             }
         ])
         .then((val) => {
-            if (val.addEmpl === "Add Intern") {
-                createIntern();
-            } else if (val.addEmpl === "Add Engineer") {
-                createEngineer();
-            } else if (val.addEmpl === "Add Manager") {
-                createManager();
+            switch(val.addEmpl) {
+                case "Add Intern":
+                    createIntern();
+                    break;
+                case "Add Engineer":
+                    createEngineer();
+                    break;
+                case "Add Manager":
+                    createManager();
+                    break;
+                case "Exit App":
+                    exitApp();
+                    break;
             }
         });
+}
+
+function exitApp() {
+    HTMLcards.length > 0 && writeToFile(HTMLcards);
 }
 
 function createManager() {
@@ -142,13 +154,12 @@ function createManager() {
                 <ul class="list-group list-group-flush bg-white">
                     <li class="list-group-item">ID: ${newHireEmp.empId}</li>
                     <li class="list-group-item">Email: <a
-                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}/a></li>
+                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}</a></li>
                     <li class="list-group-item"> Office Number: ${newHireEmp.officeNumber}</li>
                 </ul>
             </div>
         </div>
                 `;
-            console.log(HTMLcards, "line 152, create mgr q");
             askEmployeeQuest();
         });
 };
@@ -173,15 +184,13 @@ function createEngineer() {
                 <ul class="list-group list-group-flush bg-white">
                     <li class="list-group-item">ID: ${newHireEmp.empId}</li>
                     <li class="list-group-item">Email: <a
-                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}/a></li>
-                    <li class="list-group-item"> Github: <a href="https://github.com/${newHireEmp.githubUser}"</a>
+                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}</a></li>
+                    <li class="list-group-item"> Github: <a href="https://github.com/${newHireEmp.githubUser}">${newHireEmp.githubUser}</a>
                     </li>
                 </ul>
             </div>
         </div>
                 `;
-            console.log(HTMLcards, "line 184, createEngineer q");
-
             askEmployeeQuest();
         });
 };
@@ -206,41 +215,18 @@ function createIntern() {
                 <ul class="list-group list-group-flush bg-white">
                     <li class="list-group-item">ID: ${newHireEmp.empId}</li>
                     <li class="list-group-item">Email: <a
-                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}/a></li>
+                            href="mailto:${newHireEmp.empEmail}">${newHireEmp.empEmail}</a></li>
                     <li class="list-group-item"> School: ${newHireEmp.school}</li>
                 </ul>
             </div>
         </div>
                 `;
-                console.log(HTMLcards, "line 216, create intern q");
                 askEmployeeQuest();
         });
 };
 
 function writeToFile(HTMLcards) {
-    fse.writeFile('output/index.html', htmlPage, err => {
-        if (err) {
-            console.log(err, "line 224, write file");
-            return;
-        }
-        else {
-            console.log('File written successfully!');
-        }
-    });
+    fse.outputFileSync('output/index.html', makeHtmlPage(HTMLcards)) 
 };
 
-async function init() {
-    // Prompt user in command line for manager questions
-    await askEmployeeQuest();
-    console.log(HTMLcards, "line 236, init after emp q");
-    // Start team member prompts if user wants to add team members
-    if (HTMLcards.addEmpl === 'Exit App') {
-        console.log("line 239, init if statment");
-        writeToFile(HTMLcards);
-    }
-    // Call the write to file function with the data
-    console.log("line 243, outside if statement");
-};
-
-
-init();
+askEmployeeQuest();
