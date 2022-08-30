@@ -21,7 +21,7 @@ return `
     <!-- bootstrap CDN css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
     <title>Team Profile Generator</title>
 </head>
 
@@ -32,8 +32,9 @@ return `
             <p class="lead">Meet all the great peeps on our team!</p>
         </div>
     </div>
-
+    <div id="team-div">
     ${cards}
+    </div>
     <!-- boostrap scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
