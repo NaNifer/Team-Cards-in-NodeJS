@@ -24,6 +24,8 @@ Team Profile Generator is a Node.js command-line application that takes in infor
 
 ### Installation
 
+Video demo for installation and usage: [DEMO](https://drive.google.com/file/d/1-ThKnbmuMFMmzjUzQ8oLvBUYc6SCUhDU/view)
+
 1. Create a .gitignore file and include node_modules and .DS store. This ensures that the node_modules directory isn't tracked or uploaded to GitHub.
 2. Use the command-line, npm install, to install Inquirer NPM.
 3. To start answering questions to create the HTML file, use the command, node app.js in the terminal.
